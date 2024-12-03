@@ -8,7 +8,6 @@ export const Root = styled.header`
   width: 358px;
   height: 48px;
   justify-content: space-between;
-  border: red solid 1px;
 `;
 
 
