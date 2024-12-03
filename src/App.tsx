@@ -1,26 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React, { FC, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import tg from './telegramApi';
+import Auth from './pages/Auth';
+import { Registration } from './components/Auth/components/Registration/Registration';
 
-function App() {
+
+interface ProtectedRouteProps {
+  element: React.ReactElement;
+}
+
+const App: FC = () => {
+
+  useEffect(() => {
+    tg.ready();
+  }, []);
+
+
+  const isAuthenticated = (): boolean => {
+    const token = localStorage.getItem('token');
+    return Boolean(token);
+  };
+
+
+  const ProtectedRoute: FC<ProtectedRouteProps> = ({ element }) => {
+    return isAuthenticated() ? element : <Navigate to="/auth" replace />;
+  };
+
+
+  const About = () => {
+    return <h2>About</h2>;
+  };
+
+
+  const Dashboard = () => {
+    return <h2>Dashboard - Protected Content</h2>;
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          {/* Обычные маршруты */}
+          <Route path="/about" element={<ProtectedRoute element={<About />} />} />
+          {/*<Route path="/contact" component={Contact} />*/}
+
+          {/* Защищенный маршрут */}
+          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+
+          {/* Страница логина */}
+          <Route path="/auth" element={<Auth />} />
+
+          <Route path="/auth/registration" element={<Registration />} />
+
+        </Routes>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
