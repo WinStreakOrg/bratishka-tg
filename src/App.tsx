@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import tg from './telegramApi';
 import Auth from './pages/Auth';
 import { Registration } from './components/Auth/components/Registration/Registration';
+import MainPage from './pages/MainPage';
 
 
 interface ProtectedRouteProps {
@@ -44,6 +45,8 @@ const App: FC = () => {
         <Routes>
           {/* Обычные маршруты */}
           <Route path="/about" element={<ProtectedRoute element={<About />} />} />
+
+          <Route path="/" element={<MainPage />} />
           {/*<Route path="/contact" component={Contact} />*/}
 
           {/* Защищенный маршрут */}

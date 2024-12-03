@@ -4,11 +4,13 @@ import Logo from '../../../ui/Logo/Logo';
 import { Input } from '../../../ui/Input/Input';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../../ui/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 export const Registration = () => {
 
   const [nameValue, setNameValue] = useState<string>('');
   const [phoneValue, setPhoneValue] = useState<string>('');
+  const navigate = useNavigate();
 
 
   const {
@@ -95,6 +97,7 @@ export const Registration = () => {
         <div>
           <Button width={358}
                   height={36}
+                  onClick={() => navigate('/')}
                   background={'#006CBC'}>
             Подтвердить
           </Button>
