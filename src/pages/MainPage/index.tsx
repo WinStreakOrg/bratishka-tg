@@ -5,6 +5,7 @@ import { FlexRov } from '../../components/ui/FlexRov';
 import { Button } from '../../components/ui/Button/Button';
 import { Title } from '../../components/ui/Title';
 import { Text } from '../../components/ui/Text';
+import { Footer } from '../../components/Footer/Footer';
 
 
 export const Root = styled.main`
@@ -100,13 +101,31 @@ const MainPage: FC = () => {
         </Button>
       </div>
 
-      <div id={'Франшиза?'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <div id={'Франшиза'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <img src="/images/MainPage/Franchise.png" alt="" />
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Button width={270} height={36} background={'#006CBC'}>
+            Написать создателю
+          </Button>
 
-        <Button width={358} height={36} background={'#006CBC'}>
-          Узнать
+          <Button isLink width={270} height={36} background={'#006CBC'}>
+            <img src="/images/MainPage/telegram.svg" alt="" />
+          </Button>
+          <Button isLink width={270} height={36} background={'#006CBC'}>
+            <img src="/images/MainPage/browser.svg" alt="" />
+          </Button>
+        </div>
+      </div>
+
+      <div id={'команда'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <img src="/images/MainPage/sqaud.png" alt="" />
+        <Button height={36} background={'#006CBC'}>
+          Узнать о вакансиях
         </Button>
       </div>
+
+      <Footer />
     </Root>
   );
-}
+};
 export default MainPage;

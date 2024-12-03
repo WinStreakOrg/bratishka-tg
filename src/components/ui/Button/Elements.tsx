@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 type ButtonTypes = {
   width?: string | number;
   height?: string | number;
+  isLink?: boolean;
   margin?: string;
   background: string;
 }
@@ -26,4 +27,14 @@ export const Root = styled.button<ButtonTypes>`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+
+
+  ${({ isLink }) => isLink && css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 1);
+    width: 36px;
+    height: 36px;
+  `}
 `;
