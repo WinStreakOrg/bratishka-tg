@@ -1,10 +1,13 @@
 import './App.css';
-import React, { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import tg from './telegramApi';
-import Auth from './pages/Auth';
+import Auth from './pages/auth';
 import { Registration } from './components/Auth/components/Registration/Registration';
-import MainPage from './pages/MainPage';
+import MainPage from './pages/main-page';
+import { SelectBarberShop } from './components/ui/SelectBarberShop/SelectBarberShop';
+import { Bonuses } from './components/MainPage/Popups/Bonuses/Bonuses';
+import BarberShops from './pages/barber-shops';
 
 
 interface ProtectedRouteProps {
@@ -16,6 +19,9 @@ const App: FC = () => {
   useEffect(() => {
     tg.ready();
   }, []);
+
+  const [selectBarberShop, setSelectBarberShop] = useState(false);
+  const [bonuses, setBonuses] = useState(false);
 
 
   const isAuthenticated = (): boolean => {
@@ -39,14 +45,18 @@ const App: FC = () => {
   };
 
 
+
+
   return (
     <div className="App">
+
       <Router>
         <Routes>
           {/* Обычные маршруты */}
           <Route path="/about" element={<ProtectedRoute element={<About />} />} />
 
           <Route path="/" element={<MainPage />} />
+          <Route path="/barber-shops" element={<BarberShops />} />
           {/*<Route path="/contact" component={Contact} />*/}
 
           {/* Защищенный маршрут */}
@@ -59,6 +69,8 @@ const App: FC = () => {
 
         </Routes>
       </Router>
+      {selectBarberShop && <SelectBarberShop/>}
+      {bonuses && <Bonuses/>}
     </div>
   );
 };

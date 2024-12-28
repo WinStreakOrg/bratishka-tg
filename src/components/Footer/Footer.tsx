@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { FC, useState } from 'react';
+import styled, { css } from 'styled-components';
 
-export const Root = styled.footer`
+export const Root = styled.footer<{isWinStreak: boolean}>`
 
   width: 100%;
   height: 98px;
@@ -9,7 +9,14 @@ export const Root = styled.footer`
   padding: 8px 16px;
   border-radius: 8px 8px 0 0;
   background: rgba(33, 35, 40, 1);
-
+  
+  ${({ isWinStreak }) => isWinStreak && css`
+    background: rgba(44, 46, 53, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  `}
 `;
 
 export const Title = styled.div`
@@ -35,13 +42,26 @@ export const HotLineText = styled.div`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-export const Footer = () => {
+interface IProps {
+  isWinStreak: boolean;
+}
+
+export const Footer: FC<IProps> = ({ isWinStreak = false }) => {
+
+
   return (
-    <Root>
-      <Title>Контакты</Title>
-      <HotLineText>Номер горячей линии:
-        <span style={{ color: 'rgba(0, 108, 188, 1)' }}> 8 800 707 0768</span>
-      </HotLineText>
+    <Root isWinStreak={isWinStreak}>
+      {isWinStreak
+        ?
+        (<img src="/images/MainPage/winStreak.svg" alt="" />)
+        : (
+          <>
+            <Title>Контакты</Title>
+            <HotLineText>Номер горячей линии:
+              <span style={{ color: 'rgba(0, 108, 188, 1)' }}> 8 800 707 0768</span>
+            </HotLineText>
+          </>
+        )}
     </Root>
   );
 };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import styled from 'styled-components';
 import { FlexRov } from '../../components/ui/FlexRov';
@@ -6,18 +6,20 @@ import { Button } from '../../components/ui/Button/Button';
 import { Title } from '../../components/ui/Title';
 import { Text } from '../../components/ui/Text';
 import { Footer } from '../../components/Footer/Footer';
+import { ServicesPrices } from '../../components/MainPage/components/ServicesPrices';
+
 
 
 export const Root = styled.main`
-
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 0 16px;
-
 `;
 
 const MainPage: FC = () => {
+
+
   return (
     <Root>
       <Header />
@@ -78,18 +80,8 @@ const MainPage: FC = () => {
         </div>
       </div>
 
-
       <div id={'Услуги и цены'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <Title fontSize={16}>
-          Услуги и цены
-        </Title>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <img src="/images/MainPage/bratishka.png" alt="" />
-          <img src="/images/MainPage/top-master.png" alt="" />
-        </div>
-        <div>
-          <img src="/images/MainPage/art-director.png" alt="" />
-        </div>
+        <ServicesPrices  />
       </div>
 
       <div id={'Кто сегодня работает?'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -124,7 +116,7 @@ const MainPage: FC = () => {
         </Button>
       </div>
 
-      <Footer />
+      <Footer isWinStreak={false} />
     </Root>
   );
 };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -17,6 +17,10 @@ export const Text = styled.p`
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
   line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
   text-align: center;
 
 `;
@@ -36,19 +40,31 @@ interface IProps {
 }
 
 export const Header: FC<IProps> = () => {
+  const [city, setCity] = useState<string>('Самара');
 
+
+  useEffect(() => {
+
+    const savedCity = localStorage.getItem('city');
+
+    if (savedCity) setCity(savedCity);
+
+
+  }, []);
 
   return (
     <Root>
 
       <div style={{ display: 'flex', gap: '5px', alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Самара</Text>
+        <Text>{city}</Text>
         <img width={10} height={10} src="/images/Header/Vector-down.svg" alt="" />
       </div>
 
-      <div>
-        <img src="/images/Header/header-logo.svg" alt="" />
-      </div>
+      <a href={'/'}>
+        <div>
+          <img src="/images/Header/header-logo.svg" alt="" />
+        </div>
+      </a>
 
       <div style={{ display: 'flex', gap: '5px', alignItems: 'center', justifyContent: 'center' }}>
         <Text>Войти</Text>

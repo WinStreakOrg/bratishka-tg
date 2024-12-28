@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 interface IFlexRov {
 	gap?: number;
 	alignItems?: 'start' | 'end' | 'center';
 	content?: string;
+  isWrapped?: boolean;
 }
 
 const getFlexRovGap = (props: IFlexRov) => props.gap;
@@ -18,6 +19,9 @@ export const FlexRov = styled.div<IFlexRov>`
   justify-content: ${getFlexJustifyContent};
   align-items: ${getFlexAlignItems};
   gap: ${getFlexRovGap}px;
+  ${({isWrapped})=> isWrapped && css`
+    flex-wrap: wrap;
+  `}
 
 `;
 

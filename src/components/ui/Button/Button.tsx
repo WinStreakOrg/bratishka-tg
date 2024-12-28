@@ -8,7 +8,9 @@ interface IProps {
   children: React.ReactNode | string;
   onClick?: () => void;
   margin?: string;
-  isLink?:boolean
+  isLink?: boolean;
+  isCentered?: boolean;
+
 }
 
 export const Button: FC<IProps> = (props) => {
@@ -20,7 +22,8 @@ export const Button: FC<IProps> = (props) => {
     onClick,
     children,
     margin,
-    isLink
+    isLink,
+    isCentered,
   } = props;
 
   return (
@@ -28,6 +31,7 @@ export const Button: FC<IProps> = (props) => {
           background={background}
           isLink={isLink}
           margin={margin}
+          isCentered={isCentered}
           onClick={onClick}
           width={width}>
       {children}

@@ -9,7 +9,7 @@ interface IProps {
   isColorGrey?: boolean;
 }
 
-export const Root = styled.p<IProps>`
+export const Root = styled.div<IProps>`
   font-family: IBM Plex Sans, sans-serif;
   font-weight: 400;
   font-size: ${({ fontSize }) => fontSize}px;

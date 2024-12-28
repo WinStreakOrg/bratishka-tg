@@ -7,6 +7,7 @@ type ButtonTypes = {
   isLink?: boolean;
   margin?: string;
   background: string;
+  isCentered?: boolean;
 }
 
 const isColorBlue = (props: ButtonTypes) => props.background === '#006CBC' ? 'white' : 'black';
@@ -37,4 +38,13 @@ export const Root = styled.button<ButtonTypes>`
     width: 36px;
     height: 36px;
   `}
+
+  ${({ isCentered }) => isCentered && css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  `}
+  
+  
 `;
