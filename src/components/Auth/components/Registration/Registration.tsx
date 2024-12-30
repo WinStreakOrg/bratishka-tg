@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent, KeyboardEvent } from 'react';
+import React, { useState, useRef, ChangeEvent, KeyboardEvent, useContext } from 'react';
 import { Container, Label, Form, Root } from './Elements';
 import Logo from '../../../ui/Logo/Logo';
 import { Input } from '../../../ui/Input/Input';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { FlexRov } from '../../../ui/FlexRov';
 import { Footer } from '../../../Footer/Footer';
 import Select from '../../../ui/Select';
+import { CityContext } from '../../../../context/CityProvider/CityProvider';
 
 
 const options = [
@@ -18,7 +19,7 @@ const options = [
 ];
 
 export const Registration = () => {
-
+  const { handleSaveCity, city } = useContext<any>(CityContext);
   const [nameValue, setNameValue] = useState<string>('');
   const [phoneValue, setPhoneValue] = useState<string>('');
   const [cityValue, setCityValue] = useState<string>('');
@@ -27,7 +28,6 @@ export const Registration = () => {
   const [nameForm, setNameForm] = useState(true);
   const [codeForm, setCodeForm] = useState(false);
   const [cityForm, setCityForm] = useState(false);
-
 
   const [values, setValues] = useState<string[]>(Array(6).fill(''));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
@@ -137,9 +137,12 @@ export const Registration = () => {
               <Label>
                 <p>Ваш город</p>
                 <Select value={cityValue} options={options}
-                        onChange={(e: any) => setCityValue(e.target.value)}
+                        onChange={(e: any) => {
+                          setCityValue(e.target.value);
+                          handleSaveCity(e.target.value);
+                        }}
                 />
-                <img className={"arrow"} alt={''} src={'/images/Auth/arrow.svg'} />
+                <img className={'arrow'} alt={''} src={'/images/Auth/arrow.svg'} />
 
               </Label>
             </Container>
