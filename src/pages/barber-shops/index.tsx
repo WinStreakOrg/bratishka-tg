@@ -224,7 +224,6 @@ const BarberPopup = (props: any) => {
             <Title fontSize={16} lineHeight={20}>{name}</Title>
             {employee && <Text isColorBlue fontSize={16}>{employee}</Text>}
           </div>
-
           <FlexRov gap={5}>
             <Text isColorGrey fontSize={16}>Возраст:</Text>
             <Text fontSize={16}>{age}</Text>
@@ -236,9 +235,7 @@ const BarberPopup = (props: any) => {
         </div>
       </FlexRov>
       <Text fontSize={16}>{about}</Text>
-
     </Popup>
-
   );
 };
 

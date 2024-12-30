@@ -1,5 +1,5 @@
 import './App.css';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import tg from './telegramApi';
 import Auth from './pages/auth';
@@ -8,6 +8,9 @@ import MainPage from './pages/main-page';
 import { SelectBarberShop } from './components/ui/SelectBarberShop/SelectBarberShop';
 import { Bonuses } from './components/MainPage/Popups/Bonuses/Bonuses';
 import BarberShops from './pages/barber-shops';
+import Dashboard from './pages/dashboard';
+import { BonusContext } from './context/BonusProvider/BonusProvider';
+import { CityContext } from './context/CityProvider/CityProvider';
 
 
 interface ProtectedRouteProps {
@@ -20,10 +23,12 @@ const App: FC = () => {
     tg.ready();
   }, []);
 
-  const [selectBarberShop, setSelectBarberShop] = useState(false);
-  const [bonuses, setBonuses] = useState(false);
+  // const [selectBarberShop, setSelectBarberShop] = useState(false);
+  // const [bonuses, setBonuses] = useState(false);
 
-
+  const { bonusModal } = useContext<any>(BonusContext);
+  const { cityModal, handleOpen  } = useContext<any>(CityContext);
+  console.log(cityModal);
   const isAuthenticated = (): boolean => {
     const token = localStorage.getItem('token');
     return Boolean(token);
@@ -35,28 +40,18 @@ const App: FC = () => {
   };
 
 
-  const About = () => {
-    return <h2>About</h2>;
-  };
-
-
-  const Dashboard = () => {
-    return <h2>Dashboard - Protected Content</h2>;
-  };
-
-
-
-
   return (
     <div className="App">
 
       <Router>
         <Routes>
           {/* Обычные маршруты */}
-          <Route path="/about" element={<ProtectedRoute element={<About />} />} />
+          <Route path="/" element={<ProtectedRoute element={<MainPage />} />} />
 
-          <Route path="/" element={<MainPage />} />
-          <Route path="/barber-shops" element={<BarberShops />} />
+          {/*<Route path="/" element={<MainPage />} />*/}
+
+          <Route path="/barber-shops" element={<ProtectedRoute element={<BarberShops />} />} />
+
           {/*<Route path="/contact" component={Contact} />*/}
 
           {/* Защищенный маршрут */}
@@ -66,11 +61,10 @@ const App: FC = () => {
           <Route path="/auth" element={<Auth />} />
 
           <Route path="/auth/registration" element={<Registration />} />
-
         </Routes>
       </Router>
-      {selectBarberShop && <SelectBarberShop/>}
-      {bonuses && <Bonuses/>}
+      <SelectBarberShop handleClose={handleOpen} isOpen={cityModal} />
+      {bonusModal && <Bonuses />}
     </div>
   );
 };

@@ -7,11 +7,12 @@ interface IProps {
   children: React.ReactNode | string;
   isColorBlue?: boolean;
   isColorGrey?: boolean;
+  fontWeight?: number;
 }
 
 export const Root = styled.div<IProps>`
   font-family: IBM Plex Sans, sans-serif;
-  font-weight: 400;
+  font-weight: ${({ fontWeight }) => fontWeight || 400};
   font-size: ${({ fontSize }) => fontSize}px;
   color: rgba(255, 255, 255, 1);
 
@@ -21,10 +22,10 @@ export const Root = styled.div<IProps>`
 `;
 export const Text: FC<IProps> = (props) => {
   const {
-    fontSize, children, isColorBlue, isColorGrey,
+    fontSize, children, isColorBlue, isColorGrey, fontWeight,
   } = props;
   return (
-    <Root isColorGrey={isColorGrey} isColorBlue={isColorBlue} fontSize={fontSize}>
+    <Root isColorGrey={isColorGrey} fontWeight={fontWeight} isColorBlue={isColorBlue} fontSize={fontSize}>
       {children}
     </Root>
   );

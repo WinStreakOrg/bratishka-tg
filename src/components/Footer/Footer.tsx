@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-export const Root = styled.footer<{isWinStreak: boolean}>`
+export const Root = styled.footer<{ isWinStreak: boolean, height?: number }>`
 
   width: 100%;
-  height: 98px;
+  height: ${({ height }) => height || 98}px;
   gap: 20px;
   padding: 8px 16px;
   border-radius: 8px 8px 0 0;
   background: rgba(33, 35, 40, 1);
-  
+
   ${({ isWinStreak }) => isWinStreak && css`
     background: rgba(44, 46, 53, 1);
     display: flex;
@@ -44,13 +44,14 @@ export const HotLineText = styled.div`
 
 interface IProps {
   isWinStreak: boolean;
+  height?: number;
 }
 
-export const Footer: FC<IProps> = ({ isWinStreak = false }) => {
+export const Footer: FC<IProps> = ({ isWinStreak = false, height }) => {
 
 
   return (
-    <Root isWinStreak={isWinStreak}>
+    <Root height={height} isWinStreak={isWinStreak}>
       {isWinStreak
         ?
         (<img src="/images/MainPage/winStreak.svg" alt="" />)

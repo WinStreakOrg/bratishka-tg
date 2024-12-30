@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 import { Header } from '../../Header/Header';
 import { Title } from '../Title';
 import { Footer } from '../../Footer/Footer';
+import { CityContext } from '../../../context/CityProvider/CityProvider';
 
 
-const Root = styled.div`
+interface IRoot {
+  isOpen: boolean;
+}
+
+const Root = styled.div<IRoot>`
   position: fixed;
-  top: 0;
+  top: ${({ isOpen }) => isOpen ? '0' : '-1000px'};
   left: 0;
   width: 100%;
-
+  transition: top 0.7s ease;
   display: flex;
   justify-content: center;
   height: 100%;
@@ -43,7 +48,6 @@ const ListItem = styled.li`
   height: 36px;
   text-align: left;
 `;
-
 const barberShops = {
   title: 'Выбери барбершоп',
   barbers: [
@@ -62,22 +66,30 @@ const barberShops = {
   ],
 };
 
+interface IProps {
+  isOpen: boolean;
+  handleClose: ()=> void ;
+}
 
-export const SelectBarberShop = () => {
+export const SelectBarberShop: FC<IProps> = (props) => {
+
+  const { isOpen, handleClose } = props;
 
 
-  const saveCityToLocaleStorage = (city: string) => localStorage.setItem('city', city);
-
+  const { handleSaveCity } = useContext<any>(CityContext);
 
   return (
-    <Root>
+    <Root isOpen={isOpen}>
       <div className={'select_barber_shop'}>
         <Header />
         <Title marginTop={'20px 0 0 0 '} isTitleLeft lineHeight={24} fontSize={20}>{barberShops.title}</Title>
         <ListContainer>
           {barberShops.barbers.map((item, index) => {
             return (
-              <ListItem onClick={() => saveCityToLocaleStorage(item)} key={index}>{item}</ListItem>
+              <ListItem onClick={() => {
+                handleSaveCity(item);
+                handleClose()
+              }} key={index}>{item}</ListItem>
             );
           })}
         </ListContainer>

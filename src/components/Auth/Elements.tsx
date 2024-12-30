@@ -11,8 +11,10 @@ export const Root = styled.div`
 
 
 export const Container = styled.div`
+  gap: 8px;
+  padding: 0 0 16px 0;
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
-  gap: 8px;
 `;

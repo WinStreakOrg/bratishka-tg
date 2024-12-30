@@ -10,6 +10,7 @@ interface IProps {
   margin?: string;
   isLink?: boolean;
   isCentered?: boolean;
+  type?: 'text' | 'submit';
 
 }
 
@@ -23,6 +24,7 @@ export const Button: FC<IProps> = (props) => {
     children,
     margin,
     isLink,
+    type,
     isCentered,
   } = props;
 
@@ -30,6 +32,7 @@ export const Button: FC<IProps> = (props) => {
     <Root height={height}
           background={background}
           isLink={isLink}
+          type={type}
           margin={margin}
           isCentered={isCentered}
           onClick={onClick}

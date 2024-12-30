@@ -16,6 +16,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 24px;
   width: 358px;
+  align-items: center;
   border-radius: 8px 0 0 0;
 
 `;
@@ -30,11 +31,18 @@ export const Form = styled.form`
 
 `;
 
-export const Label = styled.div`
+export const Label = styled.div<{ isRow?: boolean }>`
+  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ isRow }) => isRow ? 'row' : 'column'};
   gap: 4px;
   align-items: start;
+
+  .arrow {
+    position: absolute;
+    top: 44px;
+    right: 24px;
+  }
 
   p {
     color: white;

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import styled from 'styled-components';
 import { FlexRov } from '../../components/ui/FlexRov';
@@ -7,7 +7,7 @@ import { Title } from '../../components/ui/Title';
 import { Text } from '../../components/ui/Text';
 import { Footer } from '../../components/Footer/Footer';
 import { ServicesPrices } from '../../components/MainPage/components/ServicesPrices';
-
+import { BonusContext } from '../../context/BonusProvider/BonusProvider';
 
 
 export const Root = styled.main`
@@ -17,8 +17,10 @@ export const Root = styled.main`
   padding: 0 16px;
 `;
 
+
 const MainPage: FC = () => {
 
+  const { bonusModal, handleOpen } = useContext<any>(BonusContext);
 
   return (
     <Root>
@@ -30,9 +32,10 @@ const MainPage: FC = () => {
         <img src="/images/MainPage/500-bonus.png" alt="" />
       </div>
       <FlexRov gap={8}>
-        <Button width={175} height={36} background={'#FFED00'}>Пригласить друга</Button>
+        <Button onClick={() => handleOpen()} width={175} height={36} background={'#FFED00'}>Пригласить друга</Button>
         <Button width={175} height={36} background={'#006CBC'}>Проверить бонусы</Button>
       </FlexRov>
+
       <div id={'Лучший сотрудник сети'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <Title fontSize={20}>
           Лучший сотрудник сети
@@ -81,7 +84,7 @@ const MainPage: FC = () => {
       </div>
 
       <div id={'Услуги и цены'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <ServicesPrices  />
+        <ServicesPrices />
       </div>
 
       <div id={'Кто сегодня работает?'} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

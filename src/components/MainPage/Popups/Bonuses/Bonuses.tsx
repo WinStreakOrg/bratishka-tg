@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { Popup } from '../../../ui/Popup';
 import { CustomText } from '../../../ui/CustomText';
 import { Button } from '../../../ui/Button/Button';
+import { BonusContext } from '../../../../context/BonusProvider/BonusProvider';
 
 
 const Title = styled.div`
@@ -34,11 +35,23 @@ const Text = styled.div`
 `;
 
 export const Bonuses = () => {
+  const { handleOpen } = useContext<any>(BonusContext);
 
   const [state, setState] = useState(true);
 
+
+  const isAuthenticated = () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      window.location.href = '/dashboard';
+    } else {
+      window.location.href = '/auth';
+    }
+  };
+
   return (
-    <Popup display={state} onClick={() => setState(false)}>
+    <Popup display={state} onClick={() => handleOpen()}>
       <SubTitle>
         Приглашай друзей и получай <CustomText>500 бонусов </CustomText>за каждого друга!
       </SubTitle>
@@ -85,6 +98,7 @@ export const Bonuses = () => {
       <Button margin={'8px 0 0 0 '}
               height={36}
               width={326}
+              onClick={isAuthenticated}
               background={'#FFFFFF'}>
         Личный кабинет
       </Button>

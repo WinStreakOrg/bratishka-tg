@@ -8,6 +8,7 @@ type ButtonTypes = {
   margin?: string;
   background: string;
   isCentered?: boolean;
+  type?: string
 }
 
 const isColorBlue = (props: ButtonTypes) => props.background === '#006CBC' ? 'white' : 'black';
@@ -43,8 +44,8 @@ export const Root = styled.button<ButtonTypes>`
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
   `}
-  
-  
+
+
 `;
