@@ -91,7 +91,9 @@ const MainPage: FC = () => {
         <Title lineHeight={46} fontSize={36}>
           Кто сегодня работает?
         </Title>
-        <Button width={358} height={36} background={'#006CBC'}>
+        <Button onClick={() => {
+          window.location.href = '/barber-shops';
+        }} width={358} height={36} background={'#006CBC'}>
           Узнать
         </Button>
       </div>
