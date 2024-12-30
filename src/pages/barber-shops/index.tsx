@@ -21,6 +21,7 @@ export const Barber = styled.div<{ image: string }>`
   background-image: url(${({ image }) => image});
   background-repeat: no-repeat;
   width: 114px;
+  cursor: pointer;
   height: 114px;
   font-family: IBM Plex Sans, sans-serif;
   font-size: 16px;
